@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(fetchRequest: Task.getAllTask()) var tasks: FetchedResults<Task>
     
@@ -29,6 +28,8 @@ struct ContentView: View {
                                     Text("Создать задачу")
                                 } } else {
                                     Button(action: {
+                                        TaskModel.defaults.createNewTask(name: self.newTask)
+                                        self.newTask = ""
                                     }, label: {
                                         Image(systemName: "plus.circle.fill")
                                     })
