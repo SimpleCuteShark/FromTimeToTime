@@ -46,16 +46,18 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .onDelete(perform: TaskModel.defaults.removeTask)
                 })
-            }.navigationBarTitle(Text("Доска задач"))
-            // .navigationBarItems(trailing: EditButton())
+            }
+            .navigationBarTitle(Text("Доска задач"))
+            .navigationBarItems(trailing: EditButton())
         }
     }
 }
 
 struct NewTaskView: View {
-    @State private var govno = ""
-    @State private var mocha = ""
+    @State private var test1 = ""
+    @State private var test2 = ""
     
     var body: some View {
         Text("test")
