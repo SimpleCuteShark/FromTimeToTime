@@ -8,24 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		FA87478C274DBD81003AC94E /* FromTimeToTimeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87478B274DBD81003AC94E /* FromTimeToTimeApp.swift */; };
-		FA87478E274DBD81003AC94E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87478D274DBD81003AC94E /* ContentView.swift */; };
+		FA87478E274DBD81003AC94E /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA87478D274DBD81003AC94E /* TaskListView.swift */; };
 		FA874790274DBD84003AC94E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA87478F274DBD84003AC94E /* Assets.xcassets */; };
 		FA874793274DBD84003AC94E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA874792274DBD84003AC94E /* Preview Assets.xcassets */; };
 		FA874795274DBD84003AC94E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA874794274DBD84003AC94E /* Persistence.swift */; };
 		FA874798274DBD84003AC94E /* FromTimeToTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA874796274DBD84003AC94E /* FromTimeToTime.xcdatamodeld */; };
 		FA8747A1274DC1C7003AC94E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8747A0274DC1C7003AC94E /* Task.swift */; };
+		FA8A0E31276C8294005DCECC /* EditorTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A0E30276C8294005DCECC /* EditorTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FA874788274DBD81003AC94E /* FromTimeToTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FromTimeToTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA87478B274DBD81003AC94E /* FromTimeToTimeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromTimeToTimeApp.swift; sourceTree = "<group>"; };
-		FA87478D274DBD81003AC94E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FA87478D274DBD81003AC94E /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		FA87478F274DBD84003AC94E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA874792274DBD84003AC94E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FA874794274DBD84003AC94E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FA874797274DBD84003AC94E /* FromTimeToTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FromTimeToTime.xcdatamodel; sourceTree = "<group>"; };
 		FA874799274DBD84003AC94E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA8747A0274DC1C7003AC94E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		FA8A0E30276C8294005DCECC /* EditorTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +99,8 @@
 		FA8747A6274DC458003AC94E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FA87478D274DBD81003AC94E /* ContentView.swift */,
+				FA87478D274DBD81003AC94E /* TaskListView.swift */,
+				FA8A0E30276C8294005DCECC /* EditorTaskView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -112,6 +115,7 @@
 				FA874784274DBD81003AC94E /* Sources */,
 				FA874785274DBD81003AC94E /* Frameworks */,
 				FA874786274DBD81003AC94E /* Resources */,
+				FA1042F42772842300B60092 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -166,15 +170,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		FA1042F42772842300B60092 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint --config ./.swiftlint.yml\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FA874784274DBD81003AC94E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8A0E31276C8294005DCECC /* EditorTaskView.swift in Sources */,
 				FA874798274DBD84003AC94E /* FromTimeToTime.xcdatamodeld in Sources */,
 				FA874795274DBD84003AC94E /* Persistence.swift in Sources */,
 				FA8747A1274DC1C7003AC94E /* Task.swift in Sources */,
-				FA87478E274DBD81003AC94E /* ContentView.swift in Sources */,
+				FA87478E274DBD81003AC94E /* TaskListView.swift in Sources */,
 				FA87478C274DBD81003AC94E /* FromTimeToTimeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

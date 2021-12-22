@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+// description task
 public class Task: NSManagedObject, Identifiable {
     @NSManaged public var name: String
     @NSManaged public var text: String
@@ -15,53 +16,61 @@ public class Task: NSManagedObject, Identifiable {
 }
 
 extension Task {
+    // task request
     static func getAllTask() -> NSFetchRequest<Task> {
-        let request: NSFetchRequest<Task> = Task.fetchRequest() as! NSFetchRequest<Task>
-        
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        request.sortDescriptors = [sortDescriptor]
-        
-        return request
+        if  let request: NSFetchRequest<Task> = Task.fetchRequest() as? NSFetchRequest<Task> {
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            request.sortDescriptors = [sortDescriptor]
+
+            return request
+        } else {
+            print(Error.self)
+        }
     }
 }
 
-
 class TaskModel {
-    
+
     // singleton
     static let defaults = TaskModel()
-    
+
     private init() {}
-    
+
     let viewContext = PersistenceController.shared.container.viewContext
-    
+
+    // treatment context
     private func saveContext() {
-        do{
+        do {
             try self.viewContext.save()
         } catch {
-            print(error)
+            print("save context error")
         }
     }
-    
+
+    // treatment task data
     func removeTask(at offsets: IndexSet) {
-        let getTasks = Task.getAllTask()
-        let tasks: [Task] = getTasks.propertiesToFetch as! [Task]
+        var tasks: [Task]
+        do {
+        tasks = try viewContext.fetch(Task.getAllTask())
+
         for index in offsets {
             let removeObject = tasks[index]
-            
+
             viewContext.delete(removeObject)
-            
+
             saveContext()
+        }} catch {
+            print("remove task error")
         }
     }
-    
+
     func createNewTask(name: String, text: String = "") {
         let task = Task(context: self.viewContext)
-        
+
         task.name = name
         task.text = text
         task.createdDate = Date()
-        
+
         saveContext()
     }
 }

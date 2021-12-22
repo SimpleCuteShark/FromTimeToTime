@@ -8,25 +8,28 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+// view with list of task
+struct TaskListView: View {
 
     @FetchRequest(fetchRequest: Task.getAllTask()) var tasks: FetchedResults<Task>
-    
+
     @State private var newTask = ""
-    
-    
+
     var body: some View {
         NavigationView {
             List {
+                // section make new task
                 Section(header: Text("Добавить задачу"), content: {
-                    GeometryReader() {_ in
+                    GeometryReader {_ in
                         HStack {
                             TextField("Название задачи", text: $newTask)
                             Spacer()
-                            if newTask == "" {
-                                NavigationLink(destination: NewTaskView()) {
+                            if newTask.isEmpty {
+                                // transition on view editor
+                                NavigationLink(destination: EditorTaskView()) {
                                     Text("Создать задачу")
                                 } } else {
+                                    // create fast task
                                     Button(action: {
                                         TaskModel.defaults.createNewTask(name: self.newTask)
                                         self.newTask = ""
@@ -37,9 +40,11 @@ struct ContentView: View {
                         }
                     }
                 })
+                // section with all task
                 Section(header: Text("Ваши задачи"), content: {
                     ForEach(self.tasks, id: \.self) { task in
                         HStack {
+                            // cell
                             VStack(alignment: .leading) {
                                 Text(task.name).font(.headline)
                                 Text("\(task.createdDate)").font(.caption)
@@ -55,19 +60,8 @@ struct ContentView: View {
     }
 }
 
-struct NewTaskView: View {
-    @State private var test1 = ""
-    @State private var test2 = ""
-    
-    var body: some View {
-        Text("test")
-    }
-}
-
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        TaskListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
