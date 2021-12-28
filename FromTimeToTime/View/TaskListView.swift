@@ -60,7 +60,7 @@ struct TaskListView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct TaskListView_Previews: PreviewProvider {
     static var previews: some View {
         TaskListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
