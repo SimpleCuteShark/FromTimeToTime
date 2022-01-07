@@ -19,7 +19,7 @@ extension Task {
     // task request
     static func getAllTask() -> NSFetchRequest<Task> {
         if  let request: NSFetchRequest<Task> = Task.fetchRequest() as? NSFetchRequest<Task> {
-            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: "createdDate", ascending: true)
             request.sortDescriptors = [sortDescriptor]
 
             return request
@@ -64,11 +64,13 @@ class TaskModel {
         }
     }
 
-    func createNewTask(name: String, text: String = "") {
+    func createNewTask(name: String, text: String? = nil) {
         let task = Task(context: self.viewContext)
 
         task.name = name
-        task.text = text
+        if text != nil {
+            task.text = text!
+        }
         task.createdDate = Date()
 
         saveContext()

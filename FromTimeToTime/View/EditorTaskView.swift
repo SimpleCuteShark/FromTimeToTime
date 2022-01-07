@@ -62,7 +62,11 @@ struct EditorTaskView: View {
                     .padding(.top, 40)
 
                     Button(action: {
-                        TaskModel.defaults.createNewTask(name: self.name)
+                        if self.description.isEmpty {
+                            TaskModel.defaults.createNewTask(name: self.name)
+                        } else {
+                            TaskModel.defaults.createNewTask(name: self.name, text: self.description)
+                        }
                         self.name = ""
                         self.description = ""
                         self.mode.wrappedValue.dismiss()

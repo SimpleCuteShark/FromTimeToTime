@@ -47,6 +47,9 @@ struct TaskListView: View {
                             // cell
                             VStack(alignment: .leading) {
                                 Text(task.name).font(.headline)
+                                if !task.text.isEmpty {
+                                    Text(task.text)
+                                }
                                 Text("\(task.createdDate)").font(.caption)
                             }
                         }
