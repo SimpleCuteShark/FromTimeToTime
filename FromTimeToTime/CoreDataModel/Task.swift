@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 // description task
 public class Task: NSManagedObject, Identifiable {

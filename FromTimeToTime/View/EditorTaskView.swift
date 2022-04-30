@@ -13,6 +13,9 @@ struct EditorTaskView: View {
     @State private var name = ""
     @State private var description = ""
 
+    var tags = ["clear", "red", "green", "blue"]
+    @State private var selectedTag = "Clear"
+
     init() {
         UITextView.appearance().backgroundColor = .clear
     }
@@ -60,6 +63,15 @@ struct EditorTaskView: View {
                     }
                     .padding(.horizontal, 50)
                     .padding(.top, 40)
+                    Picker("Теги", selection: $selectedTag, content: {
+                        ForEach(tags, id: \.self) {
+                            Text($0)
+                                .foregroundColor(.black)
+                        }
+                    })
+                        .background(Color.orange)
+                        .clipShape(Capsule())
+                        .frame(width: 100, height: 50)
 
                     Button(action: {
                         if self.description.isEmpty {
