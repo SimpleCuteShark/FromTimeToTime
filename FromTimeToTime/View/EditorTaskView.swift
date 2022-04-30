@@ -14,7 +14,9 @@ struct EditorTaskView: View {
     @State private var description = ""
 
     var tags = ["clear", "red", "green", "blue"]
-    @State private var selectedTag = "Clear"
+    var tagsColor = [Color.purple, Color.red, Color.green, Color.gray]
+    
+    @State private var selectedTag = "clear"
 
     init() {
         UITextView.appearance().backgroundColor = .clear
@@ -63,16 +65,19 @@ struct EditorTaskView: View {
                     }
                     .padding(.horizontal, 50)
                     .padding(.top, 40)
+                    HStack {
+                    GeometryReader {_ in
                     Picker("Теги", selection: $selectedTag, content: {
                         ForEach(tags, id: \.self) {
                             Text($0)
                                 .foregroundColor(.black)
                         }
                     })
-                        .background(Color.orange)
+                    .background(tagsColor[tags.firstIndex(of: selectedTag)!])
                         .clipShape(Capsule())
                         .frame(width: 100, height: 50)
-
+                    }
+                    }.frame(width: 100, height: 20)
                     Button(action: {
                         if self.description.isEmpty {
                             TaskModel.defaults.createNewTask(name: self.name)
